@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lab 4</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      //============ Super Class
+      function Pearson(name,address) {
+        this.name = name;
+        this.address = address;
+      }
+      Pearson.prototype.toString = function () {
+        return this.name + ' ( ' + this.address + ' )';
+      };
+
+      //============ First Sub-Class
+      function Student(name,address) { // Defining The Class
+        this.name = name; //Super class properties
+        this.address = address; //Super class properties
+
+        this.numCourses = 0; //Sup-class properties
+        this.courses = []; //Sup-class properties
+        this.grades = []; //Sup-class properties
+      }
+
+      Student.prototype = Object.create(new Pearson()); // Inhereting from Super Class
+      Student.prototype.addCourseGrade = function (course,grade) { // Adding Functions on the First sub-class
+        this.courses.push(course);
+        this.grades.push(grade);
+      };
+
+      Student.prototype.printGrades = function () { // Adding Functions on the First sub-class
+        var x ='';
+        for (var i = 0; i < this.grades.length; i++) {
+          x += this.courses[i] +': ('+ this.grades[i]+') \n';
+        }
+        return x;
+      };
+
+      Student.prototype.toString = function () { // Adding Functions on the First sub-class
+        return 'Name: ' + this.name + '\nFrom: ' + this.address+'\n'+this.printGrades() ;
+      };
+
+      //============ Second Sub-Class
+      function Teacher(name,address) { // Defining The Class
+        this.name = name; //Super class properties
+        this.address = address; //Super class properties
+
+        this.numCourses = 0; //Sup-class properties
+        this.courses = []; //Sup-class properties
+      }
+
+      Teacher.prototype = Object.create(new Pearson()); // Inhereting from Super Class
+      Teacher.prototype.addCourse = function (course) { // Adding Functions on the Second sub-class
+        this.courses.push(course);
+      };
+      Teacher.prototype.removeCourse = function (course) { // Adding Functions on the Second sub-class
+        this.courses =  this.courses.filter(function (item) {
+          return item != course;
+        });
+      };
+
+      Teacher.prototype.toString = function () { // Adding Functions on the Second sub-class
+        var x='';
+        for (var i = 0; i < this.courses.length; i++) {
+          x += this.courses[i] + ' \n';
+        }
+        return  'The teacher '+this.name+' is taking this courses:'+'\n'+ x+'And he is from '+ this.address;
+      };
+
+      //============ Testing Class
+      var n = new Student('Rayan Ahmad','Royal Commission Yanbu'); // Declaring and Initilizing an object
+      n.addCourseGrade('cs101','B');
+      n.addCourseGrade('cs102','A+');
+      n.addCourseGrade('cs202','A+');
+      n.addCourseGrade('cs204','B+');
+      alert(n) // Using Student.prototype.toString
+
+      /* - The Student Object is and instanceOf Pearson & Object Classes
+       * - The toString function is overiden from the Pearson & Object classes
+       * - Note: JS is looking for the nearest function to execute localObjectFunctions (then)=> parentObjectFunctions ... (until)=> Object object
+      */
+
+
+      var t = new Teacher('Khaled Mohammed','Riyadh'); // Declaring and Initilizing an object
+      t.addCourse('cs101');
+      t.addCourse('cs102');
+      t.addCourse('cs480');
+      alert(t) // Using Teacher.prototype.toString
+      t.removeCourse('cs101');
+      alert(t) // Using Teacher.prototype.toString
+     /* - The Teacher Object is and instanceOf Pearson & Object Classes
+      * - The toString function is overiden from the Pearson & Object classes
+      * - Note: JS is looking for the nearest function to execute localObjectFunctions (then)=> parentObjectFunctions ... (until)=> Object object
+      */
+    </script>
+  </body>
+</html>
