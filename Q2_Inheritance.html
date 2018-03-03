@@ -20,9 +20,9 @@
         this.name = name; //Super class properties
         this.address = address; //Super class properties
 
-        this.numCourses = 0; //Sup-class properties
-        this.courses = []; //Sup-class properties
-        this.grades = []; //Sup-class properties
+        this.numCourses = 0; //sub-class properties
+        this.courses = []; //sub-class properties
+        this.grades = []; //sub-class properties
       }
 
       Student.prototype = Object.create(new Pearson()); // Inhereting from Super Class
@@ -48,8 +48,8 @@
         this.name = name; //Super class properties
         this.address = address; //Super class properties
 
-        this.numCourses = 0; //Sup-class properties
-        this.courses = []; //Sup-class properties
+        this.numCourses = 0; //sub-class properties
+        this.courses = []; //sub-class properties
       }
 
       Teacher.prototype = Object.create(new Pearson()); // Inhereting from Super Class
